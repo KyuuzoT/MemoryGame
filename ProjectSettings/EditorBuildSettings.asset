@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MemoryGame.unity
+    guid: 4a77e6ab9349d734ab53b1f570c54f8b
   m_configObjects: {}
