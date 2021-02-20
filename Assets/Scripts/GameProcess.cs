@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
+using UnityBase.MemoryGame.CommonResources;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 
 namespace UnityBase.MemoryGame.GameLogic
@@ -11,7 +12,7 @@ namespace UnityBase.MemoryGame.GameLogic
     public class GameProcess : MonoBehaviour
     {
         [SerializeField] private Transform figureSpawner;
-        [SerializeField][Range(-15.0f, -0.1f)] private float speed = -5.0f;
+        [SerializeField] [Range(-15.0f, -0.1f)] private float speed = -5.0f;
         [SerializeField] private List<Transform> figuresToMemorize;
         private Transform currentFigure;
         private Transform prevFigure;
@@ -21,12 +22,16 @@ namespace UnityBase.MemoryGame.GameLogic
         private FigureBehaviour curBehaviour;
         private FigureBehaviour prevBehaviour;
 
+        private float defaultAngle = 45.0f;
+
         internal bool[] similarities = new bool[3];
 
         private UI.Handlers.ButtonClickHandler btnHandler;
 
         void Start()
         {
+            GlobalVars.Similarities = new bool[similarities.Length];
+
             btnHandler = new UI.Handlers.ButtonClickHandler();
             for (int i = 0; i < similarities.Length; i++)
             {
@@ -39,21 +44,25 @@ namespace UnityBase.MemoryGame.GameLogic
 
         void Update()
         {
-            if(currentFigure.GetComponent<FigureBehaviour>().isDestroyed)
+            if (currentFigure.Equals(null))
             {
                 prevBehaviour = curBehaviour;
-                prevFigure = currentFigure;
+                //prevFigure = currentFigure;
                 FigureInstantiation();
                 figuresCount++;
             }
+            else
+            {
+                currentFigure.Translate(rightVector * speed);
+            }
 
-            if(figuresCount > 1)
+            if (figuresCount > 1)
             {
                 if (curBehaviour.form.Equals(prevBehaviour.form))
                 {
                     similarities[0] = true;
                 }
-                if(curBehaviour.color.Equals(prevBehaviour.color))
+                if (curBehaviour.color.Equals(prevBehaviour.color))
                 {
                     similarities[1] = true;
                 }
@@ -63,7 +72,7 @@ namespace UnityBase.MemoryGame.GameLogic
                 }
             }
 
-            btnHandler.similarities = this.similarities;
+            Array.Copy(similarities, GlobalVars.Similarities, similarities.Length);
         }
 
         private void FigureInstantiation()
@@ -74,9 +83,18 @@ namespace UnityBase.MemoryGame.GameLogic
             rightVector = Vector3.right;
 
             curBehaviour = currentFigure.GetChild(0).gameObject.AddComponent<FigureBehaviour>();
-            curBehaviour.angle = 45;
-            curBehaviour.ColorizeObject(Color.red);
             curBehaviour.form = curBehaviour.transform.name;
+
+            if (curBehaviour.form.Equals("Sphere"))
+            {
+                curBehaviour.angle = 0;
+            }
+            else
+            {
+                curBehaviour.angle = Random.Range(0, 2) * defaultAngle;
+            }
+
+            curBehaviour.ColorizeObject(new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f)));
         }
     }
 }

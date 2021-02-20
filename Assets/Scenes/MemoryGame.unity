@@ -720,7 +720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   figureSpawner: {fileID: 1369884774}
-  speed: -5
+  speed: -0.9
   figuresToMemorize:
   - {fileID: 1090872992476724644, guid: 95b10ab8081a1d64d8920f88b91fa0f1, type: 3}
 --- !u!1 &1067758591
@@ -1731,6 +1731,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20b5d6ab02ba5004f8ded9999c5de8cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentLayout: {fileID: 1372998583}
   wrongAnswer: {fileID: 218716930}
   rightAnswer: {fileID: 1896710808}
 --- !u!1 &1896710806

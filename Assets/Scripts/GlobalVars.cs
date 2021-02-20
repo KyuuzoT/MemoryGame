@@ -9,6 +9,7 @@ namespace UnityBase.MemoryGame.CommonResources
     {
         internal static int RIGHT_ANSWERS { get; set; }
         internal static int WRONG_ANSWERS { get; set; }
-        //internal static DateTime 
+
+        internal static bool[] Similarities;
     }
 }

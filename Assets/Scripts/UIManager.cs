@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityBase.MemoryGame.CommonResources;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,7 @@ namespace UnityBase.MemoryGame.UI
 {
     public class UIManager : MonoBehaviour
     {
-        private Transform currentLayout;
+        [SerializeField] private Transform currentLayout;
         private Handlers.ButtonClickHandler btnHandler;
         [SerializeField] TMPro.TextMeshProUGUI wrongAnswer;
         [SerializeField] TMPro.TextMeshProUGUI rightAnswer;
@@ -50,6 +51,12 @@ namespace UnityBase.MemoryGame.UI
                                         btnHandler.ButtonClicked(item.name);
                                     });
             }
+        }
+
+        private void OnGUI()
+        {
+            wrongAnswer.text = GlobalVars.WRONG_ANSWERS.ToString();
+            rightAnswer.text = GlobalVars.RIGHT_ANSWERS.ToString();
         }
     }
 
