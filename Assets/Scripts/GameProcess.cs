@@ -26,13 +26,11 @@ namespace UnityBase.MemoryGame.GameLogic
 
         internal bool[] similarities = new bool[3];
 
-        private UI.Handlers.ButtonClickHandler btnHandler;
 
         void Start()
         {
             GlobalVars.Similarities = new bool[similarities.Length];
 
-            btnHandler = new UI.Handlers.ButtonClickHandler();
             for (int i = 0; i < similarities.Length; i++)
             {
                 similarities[i] = false;
@@ -47,7 +45,6 @@ namespace UnityBase.MemoryGame.GameLogic
             if (currentFigure.Equals(null))
             {
                 prevBehaviour = curBehaviour;
-                //prevFigure = currentFigure;
                 FigureInstantiation();
                 figuresCount++;
             }
@@ -77,24 +74,41 @@ namespace UnityBase.MemoryGame.GameLogic
 
         private void FigureInstantiation()
         {
-            currentFigure = Instantiate(figuresToMemorize.First());
+            int index = Random.Range(0, figuresToMemorize.Count);
+            currentFigure = Instantiate(figuresToMemorize[index]);
             currentFigure.position = figureSpawner.position;
             currentFigure.rotation = Quaternion.identity;
             rightVector = Vector3.right;
 
+            SetInstanceParametrs();
+        }
+
+        private void SetInstanceParametrs()
+        {
             curBehaviour = currentFigure.GetChild(0).gameObject.AddComponent<FigureBehaviour>();
             curBehaviour.form = curBehaviour.transform.name;
+            curBehaviour.angle = SetAngleBasedOnForm(curBehaviour.form);
 
-            if (curBehaviour.form.Equals("Sphere"))
+            curBehaviour.ColorizeObject(new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f)));
+        }
+
+        private float SetAngleBasedOnForm(string form)
+        {
+            if (form.Equals("Sphere"))
             {
-                curBehaviour.angle = 0;
+                 return 0.0f;
             }
             else
             {
-                curBehaviour.angle = Random.Range(0, 2) * defaultAngle;
+                if (form.Equals("Rect"))
+                {
+                    return Random.Range(0, 2) * (defaultAngle * 2);
+                }
+                else
+                {
+                    return Random.Range(0, 2) * defaultAngle;
+                }
             }
-
-            curBehaviour.ColorizeObject(new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f)));
         }
     }
 }

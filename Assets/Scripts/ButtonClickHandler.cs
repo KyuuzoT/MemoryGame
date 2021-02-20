@@ -12,15 +12,16 @@ namespace UnityBase.MemoryGame.UI.Handlers
 
         internal void ButtonClicked(string btnName)
         {
-            Debug.Log($"Count: {similaritiesCount}");
             foreach (var item in GlobalVars.Similarities)
             {
+                Debug.Log($"Similarities: {item}");
                 if(item)
                 {
                     similaritiesCount++;
                 }
             }
 
+            Debug.Log($"Count: {similaritiesCount}");
             switch (btnName)
             {
                 case "Yes":
@@ -60,6 +61,8 @@ namespace UnityBase.MemoryGame.UI.Handlers
                 default:
                     break;
             }
+
+            similaritiesCount = 0;
         }
     }
 }
