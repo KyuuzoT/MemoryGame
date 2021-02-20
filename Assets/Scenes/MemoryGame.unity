@@ -723,6 +723,8 @@ MonoBehaviour:
   speed: -0.9
   figuresToMemorize:
   - {fileID: 1090872992476724644, guid: 95b10ab8081a1d64d8920f88b91fa0f1, type: 3}
+  - {fileID: 6431916934157115515, guid: c3d5756b4410a474eba4a0c2cd3a48a1, type: 3}
+  - {fileID: 7837225032319270778, guid: 7830b43b31f8de144995a64714d33376, type: 3}
 --- !u!1 &1067758591
 GameObject:
   m_ObjectHideFlags: 0

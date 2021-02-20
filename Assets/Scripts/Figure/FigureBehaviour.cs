@@ -2,40 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FigureBehaviour : MonoBehaviour
+namespace UnityBase.MemoryGame.GameLogic.Figure
 {
-    internal float angle;
-    internal Color color;
-    internal string form;
-
-    private bool wasVisible;
-
-    void Start()
+    public class FigureBehaviour : MonoBehaviour
     {
-        wasVisible = false;
-        transform.Rotate(Vector3.forward, angle);
-    }
+        internal float angle;
+        internal Color color;
+        internal string form;
 
-    void Update()
-    {
-    }
+        private bool wasVisible;
 
-    internal void ColorizeObject(Color c)
-    {
-        this.color = c;
-        gameObject.GetComponent<Renderer>().material.color = c;
-    }
-
-    private void OnBecameInvisible()
-    {
-        if(wasVisible)
+        void Start()
         {
-            Destroy(transform.parent.gameObject);
+            wasVisible = false;
+            transform.Rotate(Vector3.forward, angle);
+        }
+
+        void Update()
+        {
+        }
+
+        internal void ColorizeObject(Color c)
+        {
+            this.color = c;
+            gameObject.GetComponent<Renderer>().material.color = c;
+        }
+
+        private void OnBecameInvisible()
+        {
+            if (wasVisible)
+            {
+                Destroy(transform.parent.gameObject);
+            }
+        }
+
+        private void OnBecameVisible()
+        {
+            wasVisible = true;
         }
     }
 
-    private void OnBecameVisible()
-    {
-        wasVisible = true;
-    }
 }

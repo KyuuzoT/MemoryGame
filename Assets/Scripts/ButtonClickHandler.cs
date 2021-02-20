@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityBase.MemoryGame.CommonResources;
+﻿using UnityBase.MemoryGame.CommonResources;
 using UnityEngine;
 
 namespace UnityBase.MemoryGame.UI.Handlers
